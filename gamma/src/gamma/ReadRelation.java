@@ -28,7 +28,7 @@ public class ReadRelation extends Thread implements gammaSupport.GammaConstants 
     /**
      * Read Table with filename and send all of its tuples to connector out
      *
-     * @param filename -- path name of tfile
+     * @param fileName -- path name of tfile
      * @param out -- connector
      */    
     @SuppressWarnings("LeakingThisInConstructor")
@@ -43,9 +43,9 @@ public class ReadRelation extends Thread implements gammaSupport.GammaConstants 
     /** ReadTable Body */
     @Override
     public void run() {
-        for (Tuple t : tab.tuples()) {
+        tab.tuples().stream().forEach((t) -> {
             w.putNextTuple(t);
-        }
+        });
         w.close();
     }
 

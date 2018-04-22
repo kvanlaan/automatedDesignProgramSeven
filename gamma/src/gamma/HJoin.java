@@ -27,6 +27,7 @@ public class HJoin extends Thread implements gammaSupport.GammaConstants {
     private final String joinkeyA, joinkeyB;
     private final TableSchema jschema;
 
+    @SuppressWarnings("LeakingThisInConstructor")
     public HJoin(Connector A, Connector B, Connector out, String joinkeyA, String joinkeyB) {
         this.joinkeyA = joinkeyA;
         this.joinkeyB = joinkeyB;

@@ -19,7 +19,7 @@ public class ReadTable extends Thread implements gammaSupport.GammaConstants {
     /**
      * Read Table with filename and send all of its tuples to connector out
      *
-     * @param filename -- path name of tfile
+     * @param filename -- path name of the file
      * @param out -- connector
      */
     public ReadTable(Connector out, String filename) {

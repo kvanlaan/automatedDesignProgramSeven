@@ -15,6 +15,7 @@ public class Print extends Thread implements gammaSupport.GammaConstants {
      * Print constructor
      * @param in  -- input connector
      */
+    @SuppressWarnings("LeakingThisInConstructor")
     public Print(Connector in) {
         this.in = in;
         this.re = in.getReadEnd();

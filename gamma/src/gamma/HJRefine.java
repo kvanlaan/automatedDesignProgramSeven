@@ -34,8 +34,8 @@ public class HJRefine implements gammaSupport.GammaConstants {
         BFilter filter = new BFilter(inB, bloom_to_bfilter, bfilter_to_hjoin, hashKey);
         filter.run();
         System.out.println("Henlo I am filtered");
-////        HJoin join = new HJoin(bloom_to_hjoin, bfilter_to_hjoin, out, hashKey);
-//        join.run();
+        HJoin join = new HJoin(bloom_to_hjoin, bfilter_to_hjoin, out, hashKey, hashKey);
+        join.run();
         System.out.println("Henlo I am refined");
     }
 }

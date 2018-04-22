@@ -12,7 +12,7 @@ public class PSplitMergeTest implements GammaConstants {
 
     @Test
     public void testSplit() {
-        Utility.redirectStdOut("out.txt");
+        Utility.redirectStdOut("/Outputs/out.txt");
         try {
             splittst("parts.pl", "pno");
             splittst("client.pl","cno");

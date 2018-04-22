@@ -21,7 +21,7 @@ public class MainTest {
 
     @Test
     public void test1() throws Exception {
-        RegTest.Utility.redirectStdOut("out.txt");
+        RegTest.Utility.redirectStdOut("Outputs/out.txt");
         // read --> join --> print
         ThreadList.init();
         Connector c1 = new Connector("input1");
@@ -29,8 +29,8 @@ public class MainTest {
         Connector c2 = new Connector("input2");
         ReadRelation r2 = new ReadRelation("RelationData/viewing.pl", c2);
         Connector o = new Connector("output");
-//        HJoin hj = new HJoin(c1, c2, jk1, jk2, o);
-//        Print p = new Print(o);
-//        ThreadList.run(p);
+        HJoin hj = new HJoin(c1, c2, o, "cno", "cno");
+        Print p = new Print(o);
+        ThreadList.run(p);
     }    
 }
