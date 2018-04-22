@@ -1,0 +1,2 @@
+rm -f *.pl out.txt sorted*.txt manifest.mf *~
+rm -fr dist build

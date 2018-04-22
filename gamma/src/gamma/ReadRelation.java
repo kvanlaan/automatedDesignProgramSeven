@@ -5,14 +5,49 @@
  */
 package gamma;
 
+import PrologDB.Table;
+import PrologDB.TableSchema;
+import PrologDB.Tuple;
+import gammaSupport.Connector;
 import java.io.*;
 import java.util.*;
+import gammaSupport.ThreadList;
+import gammaSupport.WriteEnd;
 
 /**
  *
  * @author katrinavanlaan
  */
-public class ReadRelation {
+public class ReadRelation extends Thread implements gammaSupport.GammaConstants {
+    
+    BufferedReader input;
+    TableSchema r;
+    Table tab;
+    WriteEnd w;
+    
+    /**
+     * Read Table with filename and send all of its tuples to connector out
+     *
+     * @param filename -- path name of tfile
+     * @param out -- connector
+     */    
+    @SuppressWarnings("LeakingThisInConstructor")
+    public ReadRelation(String fileName, Connector out) {
+        this.w = out.getWriteEnd();
+        tab = Table.readTable(fileName);
+        if(tab == null) System.out.println("Bruh no table:(");
+        out.setTableSchema(tab.getSchema());
+        ThreadList.add(this);
+    }
+    
+    /** ReadTable Body */
+    @Override
+    public void run() {
+        for (Tuple t : tab.tuples()) {
+            w.putNextTuple(t);
+        }
+        w.close();
+    }
 
     public static StringTokenizer readFile(String inputFile) {
         try {
