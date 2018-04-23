@@ -31,25 +31,44 @@ public class getAnswers {
 //        
         
         // test split -> donothing -> merge
-        String filename = "orders.pl";
-        String joinkey = "ono";
-        
-        Connector in = new Connector("in");
-        Connector i[] = Connector.newConnectorArray("i");
-        Connector o[] = Connector.newConnectorArray("o");
-        Connector out = new Connector("out");
+//        String filename = "orders.pl";
+//        String joinkey = "ono";
+//        
+//        Connector in = new Connector("in");
+//        Connector i[] = Connector.newConnectorArray("i");
+//        Connector o[] = Connector.newConnectorArray("o");
+//        Connector out = new Connector("out");
+//
+//        System.out.println("reading " + filename);
+//        ThreadList.init();
+//        new ReadTable(in, GammaConstants.Rel+filename);
+//        new HSplit(in, i, joinkey);
+//        for (int j = 0; j < splitLen; j++) {
+//            new DoNothing(i[j], o[j]);
+//        }
+//        new Merge(o, out);
+//        Print p = new Print(out);
+//        ThreadList.run(p);
+//        
 
-        System.out.println("reading " + filename);
-        ThreadList.init();
-        new ReadTable(in, GammaConstants.Rel+filename);
-        new HSplit(in, i, joinkey);
-        for (int j = 0; j < splitLen; j++) {
-            new DoNothing(i[j], o[j]);
-        }
-        new Merge(o, out);
-        Print p = new Print(out);
-        ThreadList.run(p);
+
+
+        // test hjoin
+        String r1name = "parts.pl";
+        String r2name = "odetails.pl";
+        String jk1 = "pno";
+        String jk2 = "pno";
+
+        Connector c1 = new Connector("input1");
+        Connector c2 = new Connector("input2");
+        Connector o = new Connector("output");
         
+        new ReadTable(c1, GammaConstants.Rel + r1name);
+        new ReadTable(c2, GammaConstants.Rel + r2name);
+        new HJoin(c1, c2, o, jk1, jk2);
+        Print p = new Print(o);
+        ThreadList.run(p);
+        System.out.format("\n\n");
         
         
         

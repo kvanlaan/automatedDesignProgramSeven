@@ -40,12 +40,16 @@ public class HJoin extends Thread implements gammaSupport.GammaConstants {
         TableSchema tsA = A.getTableSchema();
         TableSchema tsB = B.getTableSchema();
         jschema = tsA.crossProduct(tsB);
+//        tsA.print();
+//        tsB.print();
+//        jschema.print();
         out.setTableSchema(jschema);
         
         // Step 3: don't forget leaking constructor
         ThreadList.add(this);
     }
 
+    @Override
     public void run() {
         //Step one: fill table with A.
         while (true) {
@@ -57,7 +61,11 @@ public class HJoin extends Thread implements gammaSupport.GammaConstants {
             }
 
             String value = t.get(joinkeyA);
-// to do
+            // to do
+            if (!hashmap.containsKey(value)) {
+                hashmap.put(value, new LinkedList<>());
+            }
+            hashmap.get(value).add(t);
         }
 
         //Step two: Read B one Tuple at a Time
@@ -70,7 +78,18 @@ public class HJoin extends Thread implements gammaSupport.GammaConstants {
                 break;
             }
             // to do;
+            String value = t.get(joinkeyB);
+            if (!hashmap.containsKey(value)) {
+                continue;
+            }
+            for (Tuple tA : hashmap.get(value)) {
+                Tuple tJoin = new Tuple(jschema);
+                tJoin.setValues(tA);
+                tJoin.setValues(t);
+                w.putNextTuple(tJoin);
+            }
         }
         // maybe more to do.
+        w.close();
     }
 }
