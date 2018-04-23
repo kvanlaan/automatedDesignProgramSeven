@@ -24,7 +24,7 @@ public class getAnswers {
 
     public static void main(String... args) throws Exception {
         // test connector & ReadTable
-//        RegTest.Utility.redirectStdOut("Outputs/out.txt");
+//        RegTest.Utility.redirectStdOut("out.txt");
         // read --> join --> print
 //        ThreadList.init();
 //        Connector c1 = new Connector("input1");
