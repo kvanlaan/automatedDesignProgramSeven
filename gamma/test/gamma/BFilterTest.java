@@ -29,7 +29,7 @@ public class BFilterTest {
 
        new BloomSimulator(m, filter);
        new ReadTable(in, GammaConstants.Rel + filename);
-       new BFilter(in, out, m, joinkey );
+       new BFilter(in, m, out, joinkey );
        Print p = new Print(out);
        ThreadList.run(p);
        System.out.println("=====================");

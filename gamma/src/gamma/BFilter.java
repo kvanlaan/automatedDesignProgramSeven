@@ -15,20 +15,30 @@ public class BFilter extends Thread implements gammaSupport.GammaConstants {
     private final WriteEnd out;
     private final String hashKey;
     private final ArrayList<Tuple> tuples;
-    private BMap map;
+//    private BMap map;
     
+    @SuppressWarnings("LeakingThisInConstructor")
     public BFilter(Connector bIn, Connector mapIn, Connector output, String hashkey){
         this.inb = bIn.getReadEnd();
         this.inm = mapIn.getReadEnd();
         this.out = output.getWriteEnd();
-        this.map = inm.getNextBMap();
+//        this.map = inm.getNextBMap();
         this.hashKey = hashkey;
         tuples = new ArrayList<>();
+        
+        output.setTableSchema(bIn.getTableSchema());
+        
+        ThreadList.add(this);
     }
     
+    @Override
     public void run(){
         //For every tuple in B, get the map bool value and add the tuple IF
         //the bit is true
+        
+        BMap map = inm.getNextBMap();
+        inm.close();
+        
         while(true) {
             Tuple t = inb.getNextTuple();
             if (t == null) {

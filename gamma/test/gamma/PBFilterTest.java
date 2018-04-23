@@ -30,7 +30,7 @@ public class PBFilterTest {
 
        new BloomSimulator(m, filter);
        new ReadTable(in, GammaConstants.Rel+filename);
-       new PBFilter(in, out, m, joinkey );
+       new PBFilter(in, m, out, joinkey );
        Print p = new Print(out);
        ThreadList.run(p);
        System.out.println("=====================");
