@@ -87,13 +87,6 @@ public class Utility {
     private static PrintStream originalErr = null;
     private static PrintStream outfile = null;
     private static PrintStream errfile = null;
-    
-    public static void init() {
-        originalOut = null;
-        originalErr = null;
-        outfile = null;
-        errfile = null;
-    }
 
     public static void redirectStdOut(String outputFile) {
         originalOut = System.out;
