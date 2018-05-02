@@ -1,5 +1,4 @@
 #!/bin/bash
 java -jar "/Users/katrinavanlaan/Documents/automatedSoftwareDesign/automatedDesignProgramSeven/gamma/dist/gamma.jar"
-javac test/gamma/*.java
-java gamma.SortTest
+echo "Please run tests in NetBeans"
 #END
